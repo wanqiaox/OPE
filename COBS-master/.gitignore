@@ -8,4 +8,3 @@ tf_vae/
 experiments/
 models/WorldModels/
 *.pyc
-tutorial-env/*
