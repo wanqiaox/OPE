@@ -35,6 +35,7 @@ def split_trajectories(cfg, param, random_state, data):
         as_int = False
         
     perm = random_state.permutation(data.trajectories)
+    np.random.seed(cfg.seed)
     size_of_fold = int((1/param.K)*len(perm))
     for i in range(param.K):
         #np.append(param.folds, np.array([perm[i*size_of_fold:(i+1)*size_of_fold]]))
@@ -63,6 +64,7 @@ def cross_fitting(self, param, random_state, data, cfg, true, aggregate_method='
     gamma = cfg.gamma
 
     param, one_fold_data, multi_fold_data = split_trajectories(cfg, param, random_state, data)
+    np.random.seed(cfg.seed)
     
     dic = []
     dic_temp = {}
@@ -111,6 +113,7 @@ def cross_fitting(self, param, random_state, data, cfg, true, aggregate_method='
                 out = self.estimate(mrdr_Qs, multi_fold_data[i], gamma, model, true)
                 dic[i].update(out)
             elif 'IH' == model:
+                # IH is supplied with the whole data
                 ih = IH()
                 ih.fit(data, pi_e, cfg, cfg.models[model]['model'])
                 inf_hor_output = ih.evaluate(data, cfg)
@@ -122,6 +125,7 @@ def cross_fitting(self, param, random_state, data, cfg, true, aggregate_method='
                 out = self.estimate(mbased_Qs, multi_fold_data[i], gamma, model, true)
                 dic[i].update(out)
             elif 'IS' == model:
+                # IS is supplied with the whole data
                 out = self.estimate([], data, gamma, model, true, True)
                 dic[i].update(out)
             else:

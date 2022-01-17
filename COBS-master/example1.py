@@ -11,7 +11,7 @@ from ope.experiment_tools.config import Config
 from ope.experiment_tools.factory import setup_params
 
 # Get configuration
-configuration_filename = "toy_graph_pomdp_cfg.json"
+configuration_filename = "paper_graph_pomdp_cfg.json"
 with open('COBS-master/cfgs/{0}'.format(configuration_filename), 'r') as f:
     param = json.load(f)
 
@@ -19,11 +19,11 @@ param = setup_params(param) # Setup parameters
 runner = ExperimentRunner() # Instantiate a runner for an experiment
 
 # run 5 experiments, each with a varying number of trajectories
-for N in range(5):
+for N in range(1):
     
     configuration = deepcopy(param['experiment']) # Make sure to deepcopy as to never change original
-    #configuration['num_traj'] = 10000
-    configuration['num_traj'] = 8*2**N # Increase dataset size
+    configuration['num_traj'] = 1024
+    #configuration['num_traj'] = 8*2**N # Increase dataset size
 
     # store these credentials in an object
     cfg = Config(configuration)

@@ -114,6 +114,7 @@ class ExperimentRunner(object):
 
     def single_run(self, cfg):
         env = cfg.env
+        random_seed = cfg.seed
         pi_e = cfg.pi_e
         pi_b = cfg.pi_b
         processor = cfg.processor
@@ -129,8 +130,12 @@ class ExperimentRunner(object):
         #dic = {}
         #dic_2 = {}
 
+        # set the random seed for this experiment
+        rng = np.random.RandomState(random_seed)
+        np.random.seed(random_seed)
         eval_data = rollout(env, pi_e, processor, absorbing_state, N=max(10000, cfg.num_traj), T=T, frameskip=frameskip, frameheight=frameheight, path=None, filename='tmp',)
         # eval_data is generated for method evaluation
+        # set the random seed for this experiment
         behavior_data = rollout(env, pi_b, processor, absorbing_state, pi_e = pi_e, N=cfg.num_traj, T=T, frameskip=frameskip, frameheight=frameheight, path=None, filename='tmp',)
         # propensity is calculated in the rollout functions
 
@@ -155,6 +160,7 @@ class ExperimentRunner(object):
 
         # TODO: add K to function input
         # TODO: compare across DR/WDR/MAGIC and MRDR & one DM method in one run: use a wrapper to run K and K=1 at the same time
+        # TODO: visualize the trend of the difference between splitting or not
         K = 1
         num_sample_splits = 10
         param = SplitParam(K)
@@ -175,7 +181,7 @@ class ExperimentRunner(object):
         else:
             rng = np.random.RandomState(cfg.seed)
             dic_median = cross_fitting(self, param, rng, behavior_data, cfg, true)
-        
+        np.random.seed(cfg.seed)
         
         # Note: #trajectories is stored in cfg and behavior_data
         #perm = np.random.permutation(behavior_data.trajectories)
