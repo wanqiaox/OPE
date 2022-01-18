@@ -9,6 +9,7 @@ from ope.policies.basics import BasicPolicy
 from ope.experiment_tools.experiment import ExperimentRunner, analysis
 from ope.experiment_tools.config import Config
 from ope.experiment_tools.factory import setup_params
+from ope.sample_splitting.visual import visualize
 
 # Get configuration
 configuration_filename = "paper_graph_pomdp_cfg.json"
@@ -17,13 +18,15 @@ with open('COBS-master/cfgs/{0}'.format(configuration_filename), 'r') as f:
 
 param = setup_params(param) # Setup parameters
 runner = ExperimentRunner() # Instantiate a runner for an experiment
+traj_vec = []
 
 # run 5 experiments, each with a varying number of trajectories
-for N in range(1):
+for N in range(5):
     
     configuration = deepcopy(param['experiment']) # Make sure to deepcopy as to never change original
-    configuration['num_traj'] = 1024
-    #configuration['num_traj'] = 8*2**N # Increase dataset size
+    #configuration['num_traj'] = 10000
+    traj_vec.append(8*2**N)
+    configuration['num_traj'] = traj_vec[N] # Increase dataset size
 
     # store these credentials in an object
     cfg = Config(configuration)
@@ -77,3 +80,6 @@ for num, result in enumerate(results):
     analysis(result)
     print('*'*20)
     print()
+
+# Visualize the results
+visualize(results, traj_vec)

@@ -131,4 +131,7 @@ tutorial_env/*
 ope_env/*
 venv/*
 COBS-master/tutorial_env/*
+COBS-master/ope/sample_splitting/plot_arrays/*
 
+# Data
+*.csv

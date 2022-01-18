@@ -170,7 +170,7 @@ class ExperimentRunner(object):
 
         if K > 1:
             for i in range(num_sample_splits):
-                rng = np.random.RandomState(10*i)
+                rng = np.random.RandomState(cfg.seed*(i+1))
                 dic = cross_fitting(self, param, rng, behavior_data, cfg, true)
                 dic_all.append(dic)
             for method in dic_all[0]:

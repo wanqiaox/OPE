@@ -67,6 +67,7 @@ class DoublyRobust_v2(object):
         importance_weights = DoublyRobust_v2.normalize_importance_weights(
             importance_weights, is_wdr
         )
+        print(importance_weights/2)
 
         importance_weights_one_earlier = (
             np.ones([num_trajectories, 1]) * 1.0 / num_trajectories
