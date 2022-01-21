@@ -1,4 +1,4 @@
-name: base
+name: ope_env
 channels:
   - pytorch
   - gurobi

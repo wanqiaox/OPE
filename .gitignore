@@ -133,5 +133,6 @@ venv/*
 COBS-master/tutorial_env/*
 COBS-master/ope/sample_splitting/plot_arrays/*
 
-# Data
+# Data and graphs
 *.csv
+*.png

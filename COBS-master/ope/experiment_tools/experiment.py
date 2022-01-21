@@ -161,7 +161,7 @@ class ExperimentRunner(object):
         # TODO: add K to function input
         # TODO: compare across DR/WDR/MAGIC and MRDR & one DM method in one run: use a wrapper to run K and K=1 at the same time
         # TODO: visualize the trend of the difference between splitting or not
-        K = 1
+        K = 2
         num_sample_splits = 10
         param = SplitParam(K)
         

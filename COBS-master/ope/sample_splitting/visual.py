@@ -5,7 +5,8 @@ def visualize(dic, x_axis):
     assert(len(dic) == len(x_axis))
 
     # Change to 'split' if splitting
-    is_split = 'realnosplit'
+    is_split = 'split'
+    random_seed = '1330'
     
     # Choose one model among: FQE, Retrace, Tree-Backup, Q^pi(lambda), Q-Reg, MRDR, MBased, IS
     models = ['FQE', 'Retrace', 'Tree-Backup', 'Q^pi(lambda)', 'Q-Reg', 'MRDR', 'MBased']
@@ -42,12 +43,12 @@ def visualize(dic, x_axis):
         SDR = np.asarray(SDR)
         IS = np.asarray(IS)
         # Save the results vector for plotting both split and non-split
-        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + is_split + "_paper_8-128_AM_" + model + ".csv", AM, delimiter=",")
-        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + is_split + "_paper_8-128_DR_" + model + ".csv", DR, delimiter=",")
-        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + is_split + "_paper_8-128_WDR_" + model + ".csv", WDR, delimiter=",")
-        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + is_split + "_paper_8-128_MAGIC_" + model + ".csv", MAGIC, delimiter=",")
-        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + is_split + "_paper_8-128_SDR_" + model + ".csv", SDR, delimiter=",")
-        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + is_split + "_paper_8-128_IS_" + model + ".csv", IS, delimiter=",")
+        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + random_seed + "_" + is_split + "_paper_8-128_AM_" + model + ".csv", AM, delimiter=",")
+        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + random_seed + "_" + is_split + "_paper_8-128_DR_" + model + ".csv", DR, delimiter=",")
+        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + random_seed + "_" + is_split + "_paper_8-128_WDR_" + model + ".csv", WDR, delimiter=",")
+        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + random_seed + "_" + is_split + "_paper_8-128_MAGIC_" + model + ".csv", MAGIC, delimiter=",")
+        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + random_seed + "_" + is_split + "_paper_8-128_SDR_" + model + ".csv", SDR, delimiter=",")
+        np.savetxt("./COBS-master/ope/sample_splitting/plot_arrays/" + random_seed + "_" + is_split + "_paper_8-128_IS_" + model + ".csv", IS, delimiter=",")
         # plot
         plt.plot(x_axis, AM, label= is_split + ' AM ' + model)
         plt.plot(x_axis, DR, label= is_split + ' DR ' + model)
